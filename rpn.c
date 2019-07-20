@@ -83,37 +83,62 @@ int		ft_isop(char c)
 		return (0);
 }
 
+size_t	ft_stlen(char *str)
+{
+	size_t len;
+
+	len = 0;
+	while (*(str++))
+		len++;
+	return (len);
+}
+
 t_rpn	*ft_readall(char *str)
 {
 	t_rpn	*list;
 	t_rpn	*ptr_list;
+	size_t	size;
 
-	printf("##	ft_readall\n");
 	if(!(list = (t_rpn *)malloc(sizeof(t_rpn))))
 		return (NULL);
 	list->next = NULL;
 	ptr_list = list;
-	printf("##	ft_readall 2\n");
-	while (*str)
+	size = ft_strlen(str) + 1;
+
+	/*int len = 3;
+	hile (len-- && *str != '\0')
 	{
-		printf("##	ft_readall_while\n");
 		list->nb = atoi(str);
+		printf("##	while\n");
+		printf("##	list->nb = %d\n", list->nb);
+		printf("## char = %c\n", *str);
 		list->op = 'x';
-		while (ft_isdigit(*str))
+		if (*str == '\0')
+			break ;
+		if ((*str == '+' || *str == '-') && ft_isdigit(*(str + 1)))
 		{
-			printf("##	ft_readall_while ft_isdigit\n");
+			printf("##	+- c = %c\n", *str);
 			str++;
 		}
-		printf("##	ft_readall_while 2\n");
+		printf("## char = %c\n", *str);
+		while (ft_isdigit(*str) && (*(str + 1) != '\0'))
+		{
+			printf("##	ft_readall_while ft_isdigit c = %c\n", *str);
+			str++;
+		}
 		if (*str == ' ')
 			str++;
-		/*
 		if (ft_isop(*str))
 			list->op = *str;
-		str++;
+		if (*str == ' ')
+			str++;
+		printf("##	list->op = %c\n", list->op);
+		if(!(list->next = (t_rpn *)malloc(sizeof(t_rpn))))
+			return (NULL);
 		list = list->next;
-		*/
+		str++;	
 	}
+	 */
 	return (ptr_list);
 }
 
@@ -124,11 +149,11 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		nbs_and_ops = ft_readall(argv[1]); // read line, pass it, print
-		while (nbs_and_ops)
+		/*while (nbs_and_ops)
 		{
 			printf("%d	%c	%p\n", nbs_and_ops->nb, nbs_and_ops->op, nbs_and_ops);
 			nbs_and_ops = nbs_and_ops->next;
-		}
+		} */
 	}
 	else 
 		printf("Error\n");
